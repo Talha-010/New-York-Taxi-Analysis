@@ -20,8 +20,6 @@ The aim of this project is to:
 - [Installation](#installation)
 - [Data](#data)
 - [Steps in the Analysis](#steps-in-the-analysis)
-- [Results](#results)
-- [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -107,31 +105,37 @@ Similarly, we visualize how taxi fares are distributed across the dataset:
 taxi_jan_2023['total_amount'].hist(bins=50)
 ```
 
-### 5. Visual Insights
+### 5.Feature engineering
+I’ve added 3 sets of new features to the model. First set is time-based feature. These include, weekend and holiday boolean.
 
-Visualizing the data helps uncover trends and patterns. Example plots include:
-- **Trip frequency by hour of the day**  
-  Showing peak hours of taxi usage.
-  
-- **Fare amount vs. trip distance**  
-  Exploring the relationship between how far people travel and how much they pay.
+Second set is location-based information. We have Location IDs per region but there is a higher level abstraction for regions called Boroughs. This information came from the source of the main data.
 
-## Results
+The last set is weather related data. I’ve downloaded this data from this website. It’s free to use for development.
 
-Through this analysis, we found key insights such as:
-- The majority of trips are short, typically within 1-2 miles.
-- Taxi usage peaks in the late evening and early morning hours.
-- The relationship between trip distance and fare is generally linear, with exceptions for very short or very long trips.
+Here is a list of all features used in the final model: ['PULocationID', 'transaction_month', 'transaction_day', 'transaction_hour', 'transaction_week_day', 'weekend', 'is_holiday', 'Borough’, 'temperature', 'humidity', 'wind speed', 'cloud cover', 'amount of precipitation’, ‘total_amount’]
 
-## Usage
 
-You can run the analysis in this notebook by downloading the dataset and running the following command:
+The algorithms I tried and the results
+I tried Decision Trees, Random Forest and Gradient Boosting. The benchmark model is a Decision Tree. In the benchmark model, I only included the original features of the model as stated above. And on the normal models I used all original features plus the newly created ones.
 
-```bash
-jupyter notebook Main_notebook.ipynb
-```
+Here are the performance results before tuning:
 
-Make sure to update the dataset path if necessary.
+| Algorithm  | MAE  | RMSE | R2  |  
+|------------------|----------|---------|-----------|
+| Benchmark model	  |  11.7 | 17.6 |  0.27 |
+|  Decision tree	 |  10.1 | 3.1	  |  0.37 |
+| Random forest	  |  9.06 |  3.01 | 0.43  |
+|  Gradient boosting	 |  10.02	 |  3.16	 |  0.44 |
+
+
+The Random Forest model is selected to be tuned. Here are the best parameter values: n_estimators: 200 max_features': 'auto' 'max_depth': 150   bootstrap: True
+
+The performance compares to previous models is:
+
+|  Algorithm | MAE  | RMSE  | R2  |
+|------------|--------|-------|----------|
+|  Tuned Random Forest | 9.07  | 3.01  | 0.42  |
+			
 
 ## Contributing
 
