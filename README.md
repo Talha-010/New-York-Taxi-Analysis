@@ -1,14 +1,14 @@
 # New York Taxi Analysis
 
 
-##Project Overview
+## Project Overview
 This notebook aims to:
 
 Load and preprocess the dataset.
 Conduct exploratory data analysis (EDA) to understand trip patterns.
 Generate visual insights.
 
-##Data Source
+## Data Source
 The dataset used is NYC Yellow Taxi Trip Data for January 2023. It contains multiple columns including:
 
 VendorID: Taxi provider identifier
