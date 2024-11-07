@@ -2,7 +2,7 @@
 
 
 
-[Uploadi
+
 # NYC Yellow Taxi Trip Data Analysis (January 2023)
 
 This project involves an in-depth analysis of New York City's Yellow Taxi trip data for January 2023. The notebook explores trip patterns, distances, fare amounts, and much more using various data science techniques.
